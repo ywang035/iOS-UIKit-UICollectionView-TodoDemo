@@ -16,7 +16,6 @@ class AddTaskViewController: UIViewController {
     
     var delegate: AddTaskViewControllerDelegateProtocol?
     
-    
     var navBar: UINavigationBar = {
         let navBar: UINavigationBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
         navBar.setItems([UINavigationItem(title: "Add Task")], animated: true)

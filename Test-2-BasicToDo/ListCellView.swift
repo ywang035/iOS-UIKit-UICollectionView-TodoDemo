@@ -52,6 +52,8 @@ class TaskCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupLayout()
+        
+        
     }
     
     required init?(coder: NSCoder) {

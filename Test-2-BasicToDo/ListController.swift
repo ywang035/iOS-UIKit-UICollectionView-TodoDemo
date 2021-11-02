@@ -17,28 +17,26 @@ class ListController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     var taskList = [Task]()
     
-//    public init(taskList: [Task]) {
-//
-//        self.taskList = taskList
-//
-//    }
-//
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         collectionView.register(TaskCell.self, forCellWithReuseIdentifier: "cellID")
+        
     }
     
+//    override func setEditing(_ editing: Bool, animated: Bool) {
+//        super.setEditing(editing, animated: animated)
+//        self.collectionView.isEditing = editing
+//        print("edit tapped")
+//    }
+    
+    //    override func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
+    //        return true
+    //    }
     
     // list count
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-//        guard let unwrappedListCount = taskList?.count else { return 0}
-        
         return taskList.count
     }
     
@@ -54,6 +52,7 @@ class ListController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     
+
     // populate cell
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
@@ -63,6 +62,7 @@ class ListController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         return cell
     }
+    
     
     // push to detail child view
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

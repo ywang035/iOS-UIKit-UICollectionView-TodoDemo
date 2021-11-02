@@ -16,9 +16,7 @@ class MainViewController: UIViewController, AddTaskViewControllerDelegateProtoco
         Task(title: "task 3", detail: "detail 3")
     ]
     
-    
-    var listView: UICollectionView!
-    
+    var simpleListController: ListController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +32,13 @@ class MainViewController: UIViewController, AddTaskViewControllerDelegateProtoco
         // build UI
         let plusButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(showAddTaskView))
         self.navigationItem.title = "To-Do"
-        self.navigationItem.rightBarButtonItem = plusButton
+        self.navigationItem.leftBarButtonItem = plusButton
+        
+//        self.navigationItem.rightBarButtonItem = self.editButtonItem
+//        self.navigationItem.rightBarButtonItem?.primaryAction = UIAction(title: "Edit") { _ in
+//            self.simpleListController.setEditing(!self.isEditing, animated: true)
+//        }
+        
         self.navigationController?.navigationBar.tintColor = .black
     }
     
@@ -43,7 +47,7 @@ class MainViewController: UIViewController, AddTaskViewControllerDelegateProtoco
     private func setupList(){
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        let simpleListController = ListController(collectionViewLayout: layout)
+        simpleListController = ListController(collectionViewLayout: layout)
         simpleListController.taskList = taskList
         simpleListController.view.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(simpleListController.view)
