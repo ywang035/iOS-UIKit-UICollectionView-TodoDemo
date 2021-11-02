@@ -8,20 +8,24 @@
 import UIKit
 
 class ListController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+        
     
-    let list = [1, 2, 3, 4, 5]
-    
+    var taskList = [
+        Task(title: "task 1", detail: "detail 1"),
+        Task(title: "task 2"),
+        Task(title: "task 3", detail: "detail 3")
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-        collectionView.register(MyPageCell.self, forCellWithReuseIdentifier: "cellID")
+        
+        collectionView.register(TaskCell.self, forCellWithReuseIdentifier: "cellID")
     }
     
     
     // list count
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return list.count
+        return taskList.count
     }
     
     
@@ -32,18 +36,26 @@ class ListController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     // cell frame
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: 30)
+        return CGSize(width: view.frame.width, height: 50)
     }
     
     
     // populate cell
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellID", for: indexPath) as! MyPageCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellID", for: indexPath) as! TaskCell
         
-        cell.numberIndex = list[indexPath.item]
+        cell.task = taskList[indexPath.item]
         
         return cell
+    }
+    
+    // push to detail child view
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let vc = DetailViewController()
+        vc.selectedTask = taskList[indexPath.item]
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 

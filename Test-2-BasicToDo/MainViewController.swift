@@ -7,12 +7,11 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+class MainViewController: UIViewController{
     
-    var navBar: UINavigationBar!
     var listView: UICollectionView!
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -20,35 +19,29 @@ class MainViewController: UIViewController {
         setupNavigation()
         setupList()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        setupList()
+    }
 
 
     private func setupNavigation(){
-        
-        navBar = UINavigationBar()
-        navBar.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(navBar)
-        
         // build UI
-        let navItem = UINavigationItem(title: "To-Do")
         let plusButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(showAddView))
-        navItem.rightBarButtonItem = plusButton
+        self.navigationItem.title = "To-Do"
+        self.navigationItem.rightBarButtonItem = plusButton
+        self.navigationController?.navigationBar.tintColor = .black
         
-        navBar.setItems([navItem], animated: false)
-        navBar.tintColor = .black
-        navBar.barTintColor = .white
-        
-        // set constraint
-        navBar.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor).isActive = true
-        navBar.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        navBar.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true   
     }
     
     
     @objc func showAddView(){
-        
+        let addTaskViewController = AddTaskViewController()
+        self.present(addTaskViewController, animated: true)
     }
     
     
+    // set up list view
     private func setupList(){
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -59,10 +52,11 @@ class MainViewController: UIViewController {
         
         
         // set constraint
-        simpleListController.view.topAnchor.constraint(equalTo: navBar.bottomAnchor).isActive = true
+        simpleListController.view.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 20).isActive = true
         simpleListController.view.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor).isActive = true
-        simpleListController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        simpleListController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        simpleListController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+        simpleListController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
     }
+    
+    
 }
-
