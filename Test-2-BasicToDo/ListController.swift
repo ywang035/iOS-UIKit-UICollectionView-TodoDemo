@@ -7,14 +7,25 @@
 
 import UIKit
 
+protocol ListControllerDelegateProtocol {
+    func sendDataToMainViewController(listData: Task)
+}
+
 class ListController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         
+    var delegate: ListControllerDelegateProtocol? = nil
     
-    var taskList = [
-        Task(title: "task 1", detail: "detail 1"),
-        Task(title: "task 2"),
-        Task(title: "task 3", detail: "detail 3")
-    ]
+    var taskList = [Task]()
+    
+//    public init(taskList: [Task]) {
+//
+//        self.taskList = taskList
+//
+//    }
+//
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +36,9 @@ class ListController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     // list count
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+//        guard let unwrappedListCount = taskList?.count else { return 0}
+        
         return taskList.count
     }
     
