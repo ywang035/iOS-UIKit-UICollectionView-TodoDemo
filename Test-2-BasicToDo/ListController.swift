@@ -10,14 +10,19 @@ import UIKit
 
 class ListController: UICollectionViewController, UICollectionViewDelegateFlowLayout, EditTaskViewControllerDelegateProtocol {
 
+    // mockup
+    var taskList = [
+        Task(title: "task 1", detail: "detail 1"),
+        Task(title: "task 2"),
+        Task(title: "task 3", detail: "detail 3")
+    ]
+    
     
     func sendEditTaskToMainViewController(data: Task, dataIndex: Int) {
         taskList[dataIndex] = data
         collectionView.reloadData()
     }
     
-
-    var taskList = [Task]()
     
     override func viewDidLoad() {
         super.viewDidLoad()

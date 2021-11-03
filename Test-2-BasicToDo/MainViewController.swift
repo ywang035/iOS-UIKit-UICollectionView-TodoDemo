@@ -28,14 +28,9 @@ protocol EditTaskViewControllerDelegateProtocol {
 
 class MainViewController: UIViewController, AddTaskViewControllerDelegateProtocol{
     
-    // mock up data
-    var taskList = [
-        Task(title: "task 1", detail: "detail 1"),
-        Task(title: "task 2"),
-        Task(title: "task 3", detail: "detail 3")
-    ]
     
     var simpleListController: ListController!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,7 +56,6 @@ class MainViewController: UIViewController, AddTaskViewControllerDelegateProtoco
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         simpleListController = ListController(collectionViewLayout: layout)
-        simpleListController.taskList = taskList
         simpleListController.view.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(simpleListController.view)
         self.addChild(simpleListController)
@@ -84,7 +78,7 @@ class MainViewController: UIViewController, AddTaskViewControllerDelegateProtoco
     
     // delegate method - new task
     func sendNewTaskToMainViewController(data: Task) {
-        taskList.append(data)
-        setupList()
+        simpleListController.taskList.append(data)
+        simpleListController.collectionView.reloadData()
     }
 }
