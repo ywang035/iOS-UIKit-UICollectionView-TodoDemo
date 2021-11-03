@@ -16,8 +16,8 @@
 		DACAB97A272FA9C10002C4E4 /* ListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACAB979272FA9C10002C4E4 /* ListController.swift */; };
 		DACAB97E272FEC200002C4E4 /* ListCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACAB97D272FEC200002C4E4 /* ListCellView.swift */; };
 		DACAB980272FF5340002C4E4 /* DetailTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACAB97F272FF5340002C4E4 /* DetailTaskViewController.swift */; };
-		DACAB9822730B93E0002C4E4 /* TaskChildViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACAB9812730B93E0002C4E4 /* TaskChildViewController.swift */; };
 		DACAB9842732064D0002C4E4 /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACAB9832732064D0002C4E4 /* AddTaskViewController.swift */; };
+		DACAB98627323D380002C4E4 /* TaskCommonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACAB98527323D380002C4E4 /* TaskCommonView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,8 +32,8 @@
 		DACAB979272FA9C10002C4E4 /* ListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListController.swift; sourceTree = "<group>"; };
 		DACAB97D272FEC200002C4E4 /* ListCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCellView.swift; sourceTree = "<group>"; };
 		DACAB97F272FF5340002C4E4 /* DetailTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTaskViewController.swift; sourceTree = "<group>"; };
-		DACAB9812730B93E0002C4E4 /* TaskChildViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskChildViewController.swift; sourceTree = "<group>"; };
 		DACAB9832732064D0002C4E4 /* AddTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskViewController.swift; sourceTree = "<group>"; };
+		DACAB98527323D380002C4E4 /* TaskCommonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCommonView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,7 +71,7 @@
 				DACAB963272F8F360002C4E4 /* MainViewController.swift */,
 				DACAB979272FA9C10002C4E4 /* ListController.swift */,
 				DACAB97D272FEC200002C4E4 /* ListCellView.swift */,
-				DACAB9812730B93E0002C4E4 /* TaskChildViewController.swift */,
+				DACAB98527323D380002C4E4 /* TaskCommonView.swift */,
 				DACAB97F272FF5340002C4E4 /* DetailTaskViewController.swift */,
 				DACAB9832732064D0002C4E4 /* AddTaskViewController.swift */,
 				DACAB975272F98B30002C4E4 /* Task.swift */,
@@ -153,9 +153,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				DACAB964272F8F360002C4E4 /* MainViewController.swift in Sources */,
-				DACAB9822730B93E0002C4E4 /* TaskChildViewController.swift in Sources */,
 				DACAB97A272FA9C10002C4E4 /* ListController.swift in Sources */,
 				DACAB97E272FEC200002C4E4 /* ListCellView.swift in Sources */,
+				DACAB98627323D380002C4E4 /* TaskCommonView.swift in Sources */,
 				DACAB960272F8F360002C4E4 /* AppDelegate.swift in Sources */,
 				DACAB976272F98B30002C4E4 /* Task.swift in Sources */,
 				DACAB962272F8F360002C4E4 /* SceneDelegate.swift in Sources */,

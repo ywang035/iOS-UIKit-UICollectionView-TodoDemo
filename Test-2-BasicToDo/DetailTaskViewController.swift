@@ -7,12 +7,18 @@
 
 import UIKit
 
-class DetailTaskViewController: TaskChildViewController {
+class DetailTaskViewController: UIViewController {
     
     var delegate: EditTaskViewControllerDelegateProtocol?
     
     var selectedTask: Task?
     var selectedTaskIndex: Int!
+    
+    var taskView: TaskCommonView = {
+        let view = TaskCommonView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
     var saveButton: UIButton = {
         let button = UIButton()
@@ -29,10 +35,15 @@ class DetailTaskViewController: TaskChildViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        super.setupLayout()
+        view.backgroundColor = .white
         
-        navBar.isHidden = true
+        view.addSubview(taskView)
         view.addSubview(saveButton)
+        
+        taskView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
+        taskView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor).isActive = true
+        taskView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor).isActive = true
+        taskView.heightAnchor.constraint(equalToConstant: 300).isActive = true
         
         saveButton.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor).isActive = true
         saveButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -40,15 +51,15 @@ class DetailTaskViewController: TaskChildViewController {
         saveButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
         if let unwrappedSelectedTask = selectedTask {
-            super.titleTextField.text = unwrappedSelectedTask.title
-            super.detailTextField.text = unwrappedSelectedTask.detail
+            taskView.titleTextField.text = unwrappedSelectedTask.title
+            taskView.detailTextField.text = unwrappedSelectedTask.detail
         }
     }
     
 
     @objc func sendData(_ sender: Any){
         
-        guard let unwrappedTitleTextFeild = titleTextField.text else { return }
+        guard let unwrappedTitleTextFeild = taskView.titleTextField.text else { return }
         
         if unwrappedTitleTextFeild.isEmpty {
             
@@ -60,7 +71,7 @@ class DetailTaskViewController: TaskChildViewController {
         } else {
             
             // send data to main view controller
-            let editTask = Task(title: unwrappedTitleTextFeild, detail: detailTextField.text)
+            let editTask = Task(title: unwrappedTitleTextFeild, detail: taskView.detailTextField.text)
             self.delegate?.sendEditTaskToMainViewController(data: editTask, dataIndex: selectedTaskIndex)
             navigationController?.popViewController(animated: true)
             

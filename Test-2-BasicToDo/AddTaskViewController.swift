@@ -9,9 +9,15 @@ import UIKit
 
 
 
-class AddTaskViewController: TaskChildViewController {
+class AddTaskViewController: UIViewController {
     
     var delegate: AddTaskViewControllerDelegateProtocol?
+    
+    var taskView: TaskCommonView = {
+        let view = TaskCommonView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
     var doneButton: UIButton = {
         let button = UIButton()
@@ -29,8 +35,20 @@ class AddTaskViewController: TaskChildViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        super.setupLayout()
+        view.backgroundColor = .white
+        
+
+        let navBar: UINavigationBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
+        navBar.setItems([UINavigationItem(title: "Add Task")], animated: true)
+        
+        view.addSubview(navBar)
+        view.addSubview(taskView)
         view.addSubview(doneButton)
+        
+        taskView.topAnchor.constraint(equalTo: navBar.bottomAnchor, constant: 10).isActive = true
+        taskView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor).isActive = true
+        taskView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor).isActive = true
+        taskView.heightAnchor.constraint(equalToConstant: 300).isActive = true
         
         doneButton.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor).isActive = true
         doneButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -40,7 +58,7 @@ class AddTaskViewController: TaskChildViewController {
     
     @objc func sendData(_ sender: Any){
         
-        guard let unwrappedTitleTextFeild = titleTextField.text else { return }
+        guard let unwrappedTitleTextFeild = taskView.titleTextField.text else { return }
         
         if unwrappedTitleTextFeild.isEmpty {
             
@@ -52,7 +70,7 @@ class AddTaskViewController: TaskChildViewController {
         } else {
             
             // send data to main view controller
-            let newTask = Task(title: unwrappedTitleTextFeild, detail: detailTextField.text)
+            let newTask = Task(title: unwrappedTitleTextFeild, detail: taskView.detailTextField.text)
             self.delegate?.sendNewTaskToMainViewController(data: newTask)
             dismiss(animated: true, completion: nil)
         }
