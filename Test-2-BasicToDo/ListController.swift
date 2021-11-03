@@ -8,9 +8,8 @@
 import UIKit
 
 
-class ListController: UICollectionViewController, UICollectionViewDelegateFlowLayout, TaskViewControllerDelegateProtocol {
-    
-    func sendNewTaskToMainViewController(data: Task) {}
+class ListController: UICollectionViewController, UICollectionViewDelegateFlowLayout, EditTaskViewControllerDelegateProtocol {
+
     
     func sendEditTaskToMainViewController(data: Task, dataIndex: Int) {
         taskList[dataIndex] = data

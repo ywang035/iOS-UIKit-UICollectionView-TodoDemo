@@ -11,7 +11,7 @@ import UIKit
 
 class AddTaskViewController: TaskChildViewController {
     
-    var delegate: TaskViewControllerDelegateProtocol?
+    var delegate: AddTaskViewControllerDelegateProtocol?
     
     var doneButton: UIButton = {
         let button = UIButton()

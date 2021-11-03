@@ -9,7 +9,7 @@ import UIKit
 
 class DetailTaskViewController: TaskChildViewController {
     
-    var delegate: TaskViewControllerDelegateProtocol?
+    var delegate: EditTaskViewControllerDelegateProtocol?
     
     var selectedTask: Task?
     var selectedTaskIndex: Int!

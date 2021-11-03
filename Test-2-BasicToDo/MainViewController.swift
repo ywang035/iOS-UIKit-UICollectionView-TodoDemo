@@ -5,14 +5,28 @@
 //  Created by Yang W on 1/11/21.
 //
 
+/// weak delegae
+
+/// reference type vs value type
+
+/// inherit view instead of controller
+
+
+
 import UIKit
 
-protocol TaskViewControllerDelegateProtocol {
+protocol AddTaskViewControllerDelegateProtocol {
     func sendNewTaskToMainViewController(data: Task)
+}
+
+
+protocol EditTaskViewControllerDelegateProtocol {
     func sendEditTaskToMainViewController(data: Task, dataIndex: Int)
 }
 
-class MainViewController: UIViewController, TaskViewControllerDelegateProtocol{
+
+
+class MainViewController: UIViewController, AddTaskViewControllerDelegateProtocol{
     
     // mock up data
     var taskList = [
@@ -72,10 +86,5 @@ class MainViewController: UIViewController, TaskViewControllerDelegateProtocol{
     func sendNewTaskToMainViewController(data: Task) {
         taskList.append(data)
         setupList()
-    }
-    
-    // delegate method - edit task
-    func sendEditTaskToMainViewController(data: Task, dataIndex: Int) {
-        print("main")
     }
 }
