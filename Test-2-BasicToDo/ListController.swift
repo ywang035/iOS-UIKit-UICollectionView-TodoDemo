@@ -7,34 +7,27 @@
 
 import UIKit
 
-protocol ListControllerDelegateProtocol {
-    func sendDataToMainViewController(listData: Task)
-}
 
-class ListController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
-        
-    var delegate: ListControllerDelegateProtocol? = nil
+class ListController: UICollectionViewController, UICollectionViewDelegateFlowLayout, TaskViewControllerDelegateProtocol {
     
+    func sendNewTaskToMainViewController(data: Task) {}
+    
+    func sendEditTaskToMainViewController(data: Task, dataIndex: Int) {
+        taskList[dataIndex] = data
+        collectionView.reloadData()
+    }
+    
+
     var taskList = [Task]()
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
         collectionView.register(TaskCell.self, forCellWithReuseIdentifier: "cellID")
-        
+     
     }
     
-//    override func setEditing(_ editing: Bool, animated: Bool) {
-//        super.setEditing(editing, animated: animated)
-//        self.collectionView.isEditing = editing
-//        print("edit tapped")
-//    }
-    
-    //    override func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
-    //        return true
-    //    }
-    
+
     // list count
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return taskList.count
@@ -45,6 +38,7 @@ class ListController: UICollectionViewController, UICollectionViewDelegateFlowLa
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 10
     }
+    
     
     // cell frame
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -57,18 +51,17 @@ class ListController: UICollectionViewController, UICollectionViewDelegateFlowLa
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellID", for: indexPath) as! TaskCell
-        
         cell.task = taskList[indexPath.item]
-        
         return cell
     }
     
     
     // push to detail child view
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        let vc = DetailViewController()
+        let vc = DetailTaskViewController()
         vc.selectedTask = taskList[indexPath.item]
+        vc.selectedTaskIndex = indexPath.item
+        vc.delegate = self
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

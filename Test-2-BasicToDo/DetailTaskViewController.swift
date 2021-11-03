@@ -1,23 +1,24 @@
 //
-//  AddTaskViewController.swift
+//  DetailViewController.swift
 //  Test-2-BasicToDo
 //
-//  Created by Yang W on 3/11/21.
+//  Created by Yang W on 1/11/21.
 //
 
 import UIKit
 
-
-
-class AddTaskViewController: TaskChildViewController {
+class DetailTaskViewController: TaskChildViewController {
     
     var delegate: TaskViewControllerDelegateProtocol?
     
-    var doneButton: UIButton = {
+    var selectedTask: Task?
+    var selectedTaskIndex: Int!
+    
+    var saveButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         
-        button.setTitle("ADD TASK", for: .normal)
+        button.setTitle("SAVE", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .black
         button.layer.cornerRadius = 8
@@ -26,18 +27,25 @@ class AddTaskViewController: TaskChildViewController {
         return button
     }()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         super.setupLayout()
-        view.addSubview(doneButton)
         
-        doneButton.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor).isActive = true
-        doneButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        doneButton.widthAnchor.constraint(equalToConstant: 250).isActive = true
-        doneButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        navBar.isHidden = true
+        view.addSubview(saveButton)
+        
+        saveButton.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor).isActive = true
+        saveButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        saveButton.widthAnchor.constraint(equalToConstant: 250).isActive = true
+        saveButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        
+        if let unwrappedSelectedTask = selectedTask {
+            super.titleTextField.text = unwrappedSelectedTask.title
+            super.detailTextField.text = unwrappedSelectedTask.detail
+        }
     }
     
+
     @objc func sendData(_ sender: Any){
         
         guard let unwrappedTitleTextFeild = titleTextField.text else { return }
@@ -52,9 +60,10 @@ class AddTaskViewController: TaskChildViewController {
         } else {
             
             // send data to main view controller
-            let newTask = Task(title: unwrappedTitleTextFeild, detail: detailTextField.text)
-            self.delegate?.sendNewTaskToMainViewController(data: newTask)
-            dismiss(animated: true, completion: nil)
+            let editTask = Task(title: unwrappedTitleTextFeild, detail: detailTextField.text)
+            self.delegate?.sendEditTaskToMainViewController(data: editTask, dataIndex: selectedTaskIndex)
+            navigationController?.popViewController(animated: true)
+            
         }
     }
 }

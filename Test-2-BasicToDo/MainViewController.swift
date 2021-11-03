@@ -7,7 +7,12 @@
 
 import UIKit
 
-class MainViewController: UIViewController, AddTaskViewControllerDelegateProtocol{
+protocol TaskViewControllerDelegateProtocol {
+    func sendNewTaskToMainViewController(data: Task)
+    func sendEditTaskToMainViewController(data: Task, dataIndex: Int)
+}
+
+class MainViewController: UIViewController, TaskViewControllerDelegateProtocol{
     
     // mock up data
     var taskList = [
@@ -33,18 +38,12 @@ class MainViewController: UIViewController, AddTaskViewControllerDelegateProtoco
         let plusButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(showAddTaskView))
         self.navigationItem.title = "To-Do"
         self.navigationItem.leftBarButtonItem = plusButton
-        
-//        self.navigationItem.rightBarButtonItem = self.editButtonItem
-//        self.navigationItem.rightBarButtonItem?.primaryAction = UIAction(title: "Edit") { _ in
-//            self.simpleListController.setEditing(!self.isEditing, animated: true)
-//        }
-        
         self.navigationController?.navigationBar.tintColor = .black
     }
     
     
     // set up list view
-    private func setupList(){
+    func setupList(){
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         simpleListController = ListController(collectionViewLayout: layout)
@@ -69,10 +68,14 @@ class MainViewController: UIViewController, AddTaskViewControllerDelegateProtoco
     }
     
     
-    // delegate method
-    func sendDataToMainViewController(myData: Task) {
-        print("recived: \(myData)")
-        taskList.append(myData)
+    // delegate method - new task
+    func sendNewTaskToMainViewController(data: Task) {
+        taskList.append(data)
         setupList()
+    }
+    
+    // delegate method - edit task
+    func sendEditTaskToMainViewController(data: Task, dataIndex: Int) {
+        print("main")
     }
 }
