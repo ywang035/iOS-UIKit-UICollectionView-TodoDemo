@@ -7,11 +7,14 @@
 
 import UIKit
 
+protocol AddTaskViewControllerDelegateProtocol: AnyObject {
+    func sendNewTaskToMainViewController(data: Task)
+}
 
 
 class AddTaskViewController: UIViewController {
     
-    var delegate: AddTaskViewControllerDelegateProtocol?
+    weak var delegate: AddTaskViewControllerDelegateProtocol?
     
     var taskView: TaskCommonView = {
         let view = TaskCommonView()

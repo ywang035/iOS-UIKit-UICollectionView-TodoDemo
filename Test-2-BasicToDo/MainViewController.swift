@@ -9,20 +9,11 @@
 
 /// reference type vs value type
 
-/// inherit view instead of controller
-
-
-
 import UIKit
 
-protocol AddTaskViewControllerDelegateProtocol {
-    func sendNewTaskToMainViewController(data: Task)
-}
 
 
-protocol EditTaskViewControllerDelegateProtocol {
-    func sendEditTaskToMainViewController(data: Task, dataIndex: Int)
-}
+
 
 
 

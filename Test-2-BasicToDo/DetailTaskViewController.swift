@@ -7,9 +7,14 @@
 
 import UIKit
 
+protocol EditTaskViewControllerDelegateProtocol: AnyObject {
+    func sendEditTaskToMainViewController(data: Task, dataIndex: Int)
+}
+
+
 class DetailTaskViewController: UIViewController {
     
-    var delegate: EditTaskViewControllerDelegateProtocol?
+    weak var delegate: EditTaskViewControllerDelegateProtocol?
     
     var selectedTask: Task?
     var selectedTaskIndex: Int!
